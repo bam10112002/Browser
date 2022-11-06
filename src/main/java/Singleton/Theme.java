@@ -105,10 +105,7 @@ public enum Theme { LIGHT("Light"), DARK("Dark");
         historyImage.setScaleX(0.5);
         historyImage.setScaleY(0.5);
 
-        if (nameTheme.equals("Light"))
-            theme = new ImageView(new File(path + "sun.png").toURI().toString());
-        else if (nameTheme.equals("Dark"))
-            theme = new ImageView(new File(path + "moon.png").toURI().toString());
+        theme = new ImageView(new File(path + "theme.png").toURI().toString());
         theme.setScaleX(0.5);
         theme.setScaleY(0.5);
 
