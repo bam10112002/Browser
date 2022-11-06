@@ -2,35 +2,26 @@ package com.example.browser;
 
 import Singleton.Singleton;
 import Singleton.Theme;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.util.Objects;
-import java.util.Set;
 
 public class UI {
-    private AnchorPane root;
-    private Button prev;
-    private Button next;
-    private Button reload;
-    private Button addTab;
-    private Button find;
-    private Button love;
-    private Button history;
-    private Button savePage;
-    private Button changeTheme;
-    private TextField searchBar;
+    private final AnchorPane root;
+    private final Button prev;
+    private final Button next;
+    private final Button reload;
+    private final Button addTab;
+    private final Button find;
+    private final Button love;
+    private final Button history;
+    private final Button savePage;
+    private final Button changeTheme;
+    private final TextField searchBar;
 
-    UI() throws URISyntaxException {
+    UI() {
         root        = new AnchorPane();
         prev        = new Button();
         next        = new Button();
@@ -96,17 +87,14 @@ public class UI {
         changeTheme.setMinSize(30,30);
         changeTheme.setMaxSize(30,30);
 
-        changeTheme.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (Singleton.theme == Theme.DARK) {
-                    Singleton.theme = Theme.LIGHT;
-                }
-                else  if (Singleton.theme == Theme.LIGHT) {
-                    Singleton.theme = Theme.DARK;
-                }
-                SetStyles();
+        changeTheme.setOnAction(event -> {
+            if (Singleton.theme == Theme.DARK) {
+                Singleton.theme = Theme.LIGHT;
             }
+            else  if (Singleton.theme == Theme.LIGHT) {
+                Singleton.theme = Theme.DARK;
+            }
+            SetStyles();
         });
 
         SetStyles();

@@ -1,6 +1,5 @@
 package Singleton;
 
-import javafx.scene.effect.Light;
 import javafx.scene.image.ImageView;
 import lombok.Getter;
 import lombok.NonNull;
@@ -24,7 +23,7 @@ public enum Theme { LIGHT("Light"), DARK("Dark");
 
 
     Theme(@NonNull String name) {
-        String ThemePath = "";
+        String ThemePath;
         if (name.equals("Light")) {
             anchorPaneStyle = "-fx-background-color: white;";
             tubButtonStyle = """
