@@ -24,6 +24,7 @@ public enum Theme { LIGHT("Light"), DARK("Dark");
 
 
     Theme(@NonNull String name) {
+        String ThemePath = "";
         if (name.equals("Light")) {
             anchorPaneStyle = "-fx-background-color: white;";
             tubButtonStyle = """
@@ -43,8 +44,7 @@ public enum Theme { LIGHT("Light"), DARK("Dark");
                     -fx-font-size: 14px;
                      """;
 
-            String ThemePath = "src/main/resources/light-theme/";
-            LoadImages(ThemePath, name);
+            ThemePath = "src/main/resources/light-theme/";
         }
         else if (name.equals("Dark")) {
             anchorPaneStyle = "-fx-background-color: #1E2029;";
@@ -65,14 +65,15 @@ public enum Theme { LIGHT("Light"), DARK("Dark");
                             -fx-text-fill: white;
                              """;
 
-            String ThemePath = "src/main/resources/dark-theme/";
-            LoadImages(ThemePath, name);
+            ThemePath = "src/main/resources/dark-theme/";
         }
         else {
             System.err.println("Error theme not found");
+            return;
         }
+        LoadImages(ThemePath);
     }
-    private void LoadImages(String path, String nameTheme) {
+    private void LoadImages(String path) {
         addTabImage = new ImageView(new File(path + "add-tab.png").toURI().toString());
         addTabImage.setScaleX(0.5);
         addTabImage.setScaleY(0.5);
