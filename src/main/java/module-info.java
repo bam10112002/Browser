@@ -8,6 +8,8 @@ module com.example.browser {
 
     opens com.example.browser to javafx.fxml;
     exports com.example.browser;
-    exports Singleton;
-    opens Singleton to javafx.fxml;
+    exports com.example.browser.Singleton;
+    opens com.example.browser.Singleton to javafx.fxml;
+    exports com.example.browser.ui;
+    opens com.example.browser.ui to javafx.fxml;
 }
