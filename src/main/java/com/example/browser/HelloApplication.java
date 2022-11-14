@@ -18,10 +18,11 @@ public class HelloApplication extends Application {
         stage.setMinHeight(700);
         stage.setMinWidth(1000);
 
+
         UI ui = new UI();
+        Broker broker = new Broker(ui);
         ui.Resize(stage.getMinWidth(), stage.getMinHeight());
 
-        Broker broker = new Broker(ui);
 
         //Resize event
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {

@@ -27,4 +27,9 @@ public class ButtonGroup {
         buttons.put(siteId, btn);
         return btn;
     }
+    public void ChangeTheme() {
+        for (UUID siteId : buttons.keySet()) {
+            buttons.get(siteId).setStyle(Singleton.theme.getTubButtonStyle());
+        }
+    }
 }

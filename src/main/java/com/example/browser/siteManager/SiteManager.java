@@ -1,7 +1,6 @@
 package com.example.browser.siteManager;
 
-import com.example.browser.ui.SiteView;
-import javafx.scene.layout.AnchorPane;
+import javafx.concurrent.Worker;
 import lombok.Setter;
 
 import java.util.Map;
@@ -15,11 +14,9 @@ public class SiteManager {
     @Setter
     Consumer<Site> listener;
 
-    public SiteManager(AnchorPane root) {
+    public SiteManager() {
         sites = new TreeMap<UUID, Site>();
-        Site baseSite = new Site("https://google.com", this::SiteStatusChanged);
-        sites.put(baseSite.getId(), baseSite);
-        currentSiteId = baseSite.getId();
+        currentSiteId = null;
     }
 
     public Site getCurrentSite() {
@@ -33,11 +30,15 @@ public class SiteManager {
         return newSite;
     }
 
-    public void ChangeSite(UUID siteId) {
+    public void ChangeTub(UUID siteId) {
         currentSiteId = siteId;
+    }
+    public void ChangeSite(String newUrl) {
+        sites.get(currentSiteId).changeSite(newUrl);
     }
 
     public void SiteStatusChanged(UUID siteId) {
+        Site site = sites.get(siteId);
         listener.accept(sites.get(siteId));
     }
 }

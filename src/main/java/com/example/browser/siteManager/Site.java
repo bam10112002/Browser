@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Site {
     @Getter
@@ -37,7 +39,7 @@ public class Site {
     }
     private void Failed() {
         try {
-            File file = new File("src/main/resources/404.html");
+            File file = new File("src/main/resources/pageNotFound.html");
             URL url = file.toURI().toURL();
             webEngine.load(url.toString());
         }
@@ -49,13 +51,14 @@ public class Site {
     private void LoadSite(String url) {
         this.url = url;
         try { URL _url = new URL(url); webEngine.load(url);}
-        catch (Exception ex) { Failed(); }
+        catch (Exception ex) { Failed(); statusChanges.accept(id); }
 
         worker = webEngine.getLoadWorker();
         worker.stateProperty().addListener(new ChangeListener<Worker.State>() {
             @Override
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-                if (newValue == Worker.State.FAILED) {
+                Logger.getAnonymousLogger().log(Level.INFO, newValue.name());
+                if (newValue == Worker.State.FAILED || newValue == Worker.State.CANCELLED) {
                     Failed();
                 }
                 statusChanges.accept(id);

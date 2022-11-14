@@ -12,8 +12,7 @@ public class SiteView implements Resizable{
         this.root = root;
     }
     public void ChangeView(@NonNull Site newSite) {
-        newSite.getWebView().relocate(0,100);
-        newSite.getWebView().setMinSize(root.getMinWidth(), root.getMinHeight()-100);
+        newSite.getWebView().relocate(0,80);
         if (current != null)
             root.getChildren().remove(current.getWebView());
         root.getChildren().add(newSite.getWebView());
@@ -22,6 +21,6 @@ public class SiteView implements Resizable{
 
     @Override
     public void Resize(double x, double y) {
-        this.current.getWebView().setMinSize(x, y - 90);
+        this.current.getWebView().setMinSize(x, y - 80);
     }
 }

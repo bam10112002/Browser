@@ -2,6 +2,7 @@ package com.example.browser.ui;
 
 import com.example.browser.Singleton.Singleton;
 import com.example.browser.Singleton.Theme;
+import com.example.browser.siteManager.Site;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -30,9 +31,6 @@ public class UI implements Resizable{
     int searchBarWidth = 510;
 
     public UI() {
-
-        buttonGroup = new ButtonGroup(this::ClickedButtonOnButtonGroup);
-
         root        = new AnchorPane();
         prev        = new Button();
         next        = new Button();
@@ -45,19 +43,21 @@ public class UI implements Resizable{
         changeTheme = new Button();
         searchBar   = new TextField();
         siteView = new SiteView(root);
+        buttonGroup = new ButtonGroup(this::ClickedButtonOnButtonGroup);
         root.getChildren().addAll(prev, next, reload, addTab, find, like,
                                    history, savePage, changeTheme, searchBar);
 
-        prev.setTranslateY(50);
-        next.setTranslateY(50);
-        reload.setTranslateY(50);
-        addTab.setTranslateY(50);
-        find.setTranslateY(50);
-        like.setTranslateY(50);
-        history.setTranslateY(50);
-        savePage.setTranslateY(50);
-        changeTheme.setTranslateY(50);
-        searchBar.setTranslateY(50);
+        int yShift = 35;
+        prev.setTranslateY(yShift);
+        next.setTranslateY(yShift);
+        reload.setTranslateY(yShift);
+        addTab.setTranslateY(yShift);
+        find.setTranslateY(yShift);
+        like.setTranslateY(yShift);
+        history.setTranslateY(yShift);
+        savePage.setTranslateY(yShift);
+        changeTheme.setTranslateY(yShift);
+        searchBar.setTranslateY(yShift);
 
         prev.setTranslateX(0);
         prev.setMinSize(30,30);
@@ -143,6 +143,8 @@ public class UI implements Resizable{
 
         next.setGraphic(Singleton.theme.getNextImage());
         next.setStyle(Singleton.theme.getButtonStyle());
+
+        buttonGroup.ChangeTheme();
     }
 
     public void setHandlerPrevBtn    (ButtonInterface handler) {
@@ -186,6 +188,13 @@ public class UI implements Resizable{
     public void AddButtonToButtonGroup(UUID siteId) {
         root.getChildren().add(buttonGroup.AddButton(siteId));
     }
+    public void RenameButtonOnButtonGroup(UUID id, String name) {
+        buttonGroup.SetTextToButton(id, name);
+    }
+    public void ChangeSiteView(Site site) {
+        siteView.ChangeView(site);
+        siteView.Resize(root.getWidth(), root.getHeight());
+    }
     @Override
     public void Resize(double x, double y) {
         searchBarWidth = (int)(x - 9*40) - 10;
@@ -199,6 +208,6 @@ public class UI implements Resizable{
         searchBar.setMinSize(searchBarWidth - 10,30);
         searchBar.setMaxSize(searchBarWidth - 10,30);
 
-//        siteView.Resize(x,y);
+        siteView.Resize(x,y);
     }
 }
