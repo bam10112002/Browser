@@ -2,15 +2,29 @@ package com.example.browser.siteManager;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import lombok.Getter;
+import lombok.NonNull;
+import org.w3c.dom.Document;
 
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.logging.Level;
@@ -65,6 +79,12 @@ public class Site {
             }
         });
     }
+    public void Reload() {
+        webEngine.reload();
+    }
+    public String GetHtml() {
+        return (String) webEngine.executeScript("document.documentElement.outerHTML");
+    }
 
     public Worker.State getState() {
         return  worker.getState();
@@ -74,5 +94,17 @@ public class Site {
     public void changeSite(String newUrl) {
         prevUrlList.add(url);
         LoadSite(newUrl);
+    }
+    public void getHistory(@NonNull LinkedList<WebHistory.Entry> history) {
+        history.addAll(webEngine.getHistory().getEntries());
+    }
+
+    public void Prev() {
+        webEngine.getHistory().go(-1);
+        url = webEngine.getHistory().getEntries().get(webEngine.getHistory().getCurrentIndex()).getUrl();
+    }
+    public void Next() {
+        webEngine.getHistory().go(1);
+        url = webEngine.getHistory().getEntries().get(webEngine.getHistory().getCurrentIndex()).getUrl();
     }
 }

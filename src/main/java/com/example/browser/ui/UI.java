@@ -23,6 +23,7 @@ public class UI implements Resizable{
     private final Button history;
     private final Button savePage;
     private final Button changeTheme;
+    private final Button showFavoriteList;
     private final TextField searchBar;
 
     SiteView siteView;
@@ -41,11 +42,12 @@ public class UI implements Resizable{
         history     = new Button();
         savePage    = new Button();
         changeTheme = new Button();
+        showFavoriteList = new Button();
         searchBar   = new TextField();
         siteView = new SiteView(root);
         buttonGroup = new ButtonGroup(this::ClickedButtonOnButtonGroup);
         root.getChildren().addAll(prev, next, reload, addTab, find, like,
-                                   history, savePage, changeTheme, searchBar);
+                                   history, savePage, changeTheme, showFavoriteList, searchBar);
 
         int yShift = 35;
         prev.setTranslateY(yShift);
@@ -57,6 +59,7 @@ public class UI implements Resizable{
         history.setTranslateY(yShift);
         savePage.setTranslateY(yShift);
         changeTheme.setTranslateY(yShift);
+        showFavoriteList.setTranslateY(yShift);
         searchBar.setTranslateY(yShift);
 
         prev.setTranslateX(0);
@@ -99,6 +102,10 @@ public class UI implements Resizable{
         changeTheme.setTranslateX(searchBarWidth + 8 * 40);
         changeTheme.setMinSize(30,30);
         changeTheme.setMaxSize(30,30);
+
+        showFavoriteList.setTranslateX(searchBarWidth + 9 * 40);
+        showFavoriteList.setMinSize(30,30);
+        showFavoriteList.setMaxSize(30,30);
 
         changeTheme.setOnAction(event -> {
             if (Singleton.theme == Theme.DARK) {
@@ -150,6 +157,9 @@ public class UI implements Resizable{
     public void setHandlerPrevBtn    (ButtonInterface handler) {
         prev.setOnAction(event -> handler.execute());
     }
+    public void setHandlerShowFavoriteList    (ButtonInterface handler) {
+        showFavoriteList.setOnAction(event -> handler.execute());
+    }
     public void setHandlerNextBtn    (ButtonInterface handler) {
         next.setOnAction(event -> handler.execute());
     }
@@ -168,7 +178,7 @@ public class UI implements Resizable{
     public void setHandlerSavePageBtn(ButtonInterface handler) {
         savePage.setOnAction(event -> handler.execute());
     }
-    public void setHandlerLikeBtn(ButtonInterface handler) {
+    public void setHandlerFavoriteBtn(ButtonInterface handler) {
         like.setOnAction(event -> handler.execute());
     }
 
@@ -197,13 +207,14 @@ public class UI implements Resizable{
     }
     @Override
     public void Resize(double x, double y) {
-        searchBarWidth = (int)(x - 9*40) - 10;
+        searchBarWidth = (int)(x - 10*40) - 10;
         addTab.setTranslateX     (searchBarWidth + 3 * 40);
         find.setTranslateX       (searchBarWidth + 4 * 40);
         like.setTranslateX       (searchBarWidth + 5 * 40);
         history.setTranslateX    (searchBarWidth + 6 * 40);
         savePage.setTranslateX   (searchBarWidth + 7 * 40);
         changeTheme.setTranslateX(searchBarWidth + 8 * 40);
+        showFavoriteList.setTranslateX(searchBarWidth + 9 * 40);
 
         searchBar.setMinSize(searchBarWidth - 10,30);
         searchBar.setMaxSize(searchBarWidth - 10,30);
