@@ -34,6 +34,7 @@ public class Broker {
         ui.SetHandlerButtonGroupClicked(this::HandlerButtonGroup);
 
         Site st = siteManager.AddNewSite("https://google.com");
+        ui.setTFText("https://google.com");
         ui.AddButtonToButtonGroup(st.getId());
         ui.ChangeSiteView(st);
     }
@@ -77,6 +78,8 @@ public class Broker {
         siteManager.AddCurrentToFavoriteList();
     }
     private void HandlerShowFavoriteList() {
+        if (siteManager.GetFavoriteList().isEmpty())
+            System.out.println("List is empty!");
         for (String url : siteManager.GetFavoriteList()) {
             System.out.println(url);
         }

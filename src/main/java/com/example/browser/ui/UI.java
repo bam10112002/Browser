@@ -151,6 +151,9 @@ public class UI implements Resizable{
         next.setGraphic(Singleton.theme.getNextImage());
         next.setStyle(Singleton.theme.getButtonStyle());
 
+        showFavoriteList.setGraphic(Singleton.theme.getEye());
+        showFavoriteList.setStyle(Singleton.theme.getButtonStyle());
+
         buttonGroup.ChangeTheme();
     }
 

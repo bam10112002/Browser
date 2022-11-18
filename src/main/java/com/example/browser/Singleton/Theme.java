@@ -17,6 +17,7 @@ public enum Theme { LIGHT("Light"), DARK("Dark");
     private ImageView reloadImage;
     private ImageView saveImage;
     private ImageView addTabImage;
+    private ImageView eye;
     private ImageView findImage;
     private ImageView historyImage;
     private ImageView theme;
@@ -77,17 +78,21 @@ public enum Theme { LIGHT("Light"), DARK("Dark");
         addTabImage.setScaleX(0.5);
         addTabImage.setScaleY(0.5);
 
-        prevImage   = new ImageView(new File(path + "next-arrow.png").toURI().toString());
+        prevImage   = new ImageView(new File(path + "prev-arrow.png").toURI().toString());
         prevImage.setScaleX(0.5);
         prevImage.setScaleY(0.5);
 
-        nextImage   = new ImageView(new File(path + "prev-arrow.png").toURI().toString());
+        nextImage   = new ImageView(new File(path + "next-arrow.png").toURI().toString());
         nextImage.setScaleX(0.5);
         nextImage.setScaleY(0.5);
 
         reloadImage = new ImageView(new File(path + "reload.png").toURI().toString());
         reloadImage.setScaleX(0.5);
         reloadImage.setScaleY(0.5);
+
+        eye         = new ImageView(new File(path + "eye.png").toURI().toString());
+        eye.setScaleX(0.5);
+        eye.setScaleY(0.5);
 
         saveImage   = new ImageView(new File(path + "load.png").toURI().toString());
         saveImage.setScaleX(0.5);
