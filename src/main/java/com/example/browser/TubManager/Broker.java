@@ -40,12 +40,21 @@ public class Broker {
     }
 
     private void HandlerPrevBtn()     {
-        siteManager.Prev();
-        ui.setTFText(siteManager.getCurrentSite().getUrl());
+        try {
+            siteManager.Prev();
+            ui.setTFText(siteManager.getCurrentSite().getUrl());
+        }
+        catch (Exception ex) {
+            ShowAlert("You in first page!!!");
+        }
     }
     private void HandlerNextBtn()     {
-        siteManager.Next();
-        ui.setTFText(siteManager.getCurrentSite().getUrl());
+        try {
+            siteManager.Next();
+            ui.setTFText(siteManager.getCurrentSite().getUrl());
+        } catch (Exception ex) {
+            ShowAlert("You in last page!!!");
+        }
     }
     private void HandlerReloadBtn()   { siteManager.ReloadCurrentSite(); }
     private void HandlerAddTabBtn()   {
@@ -96,12 +105,12 @@ public class Broker {
             ui.RenameButtonOnButtonGroup(site.getId(), site.GetTitle());
         }
     }
-    private void ShowAlert() {
+    private void ShowAlert(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setWidth(1000);
-        alert.setTitle("History");
+        alert.setTitle("Alert");
         alert.setHeaderText(null);
-        alert.setContentText("Pleas try later!!!");
+        alert.setContentText(text);
         alert.showAndWait();
     }
     private void ShowHistory(@NonNull LinkedList<WebHistory.Entry> history) {
